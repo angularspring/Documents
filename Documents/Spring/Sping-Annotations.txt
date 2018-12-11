@@ -1,0 +1,29 @@
+Refer:- spring-annotations java project. 
+
+
+
+Sping Annotataion:-  
+-------------------
+
+Spring Annotations allows us to configure dependencies and implement dependency injection through java programs.
+
+*Spring framework implements and promotes the principle of control inversion (IOC) or dependency injection (DI) and is in fact an IOC container.
+
+*Traditionally, Spring allows a developer to manage bean dependencies by using XML-based configuration.
+
+*There is an alternative way to define beans and their dependencies. This method is a Java-based configuration.
+
+*Unlike the XML approach, Java-based configuration allows you to manage bean components programmatically. That’s why Spring annotations were introduced.
+
+List of Sping Annotataion:- 
+
+@Configuration  // used for replace the sping-config.xml  file 
+@ComponentScan("com.journaldev") //search for beans under this package. 
+@PropertySource("classpath:oracledatabase.properties") // load the profiles files. 
+@Bean - define the bean in the config file. 
+
+@Component //Java bean class/ any class which want to use for ID .
+@Value("${databaseName}") // pass the value for the properities. 
+
+@Autowired
+

@@ -1,0 +1,68 @@
+step 1: Create Sping Parent project
+mvn archetype:generate -DgroupId=com.skills.multimodule -DartifactId=spring-parent-project
+
+step 2: Update pom.xml to declare it as Sping parent project
+
+../sping-parent-project/pom.xml
+
+<packaging>pom</packaging>
+
+e.g.,
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0                              http://maven.apache.org/maven-v4_0_0.xsd">
+			
+ <modelVersion>4.0.0</modelVersion>
+
+ <groupId>com.skills.multimodule</groupId>
+  <artifactId>spring-parent-project</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+  
+  <name>Simple Spring Application</name>
+  <url>http://maven.apache.org</url>
+ 
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+ 
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>3.8.1</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+  
+ </project>
+
+step 3: Create sub-modules
+via command line, navigate to the directory of parent-project, and fire following commands
+
+C:/>cd sping-parent-project
+
+mvn archetype:generate -DgroupId=com.skills.multimodule -DartifactId=sping-ioc
+mvn archetype:generate -DgroupId=com.skills.multimodule -DartifactId=sping-aop
+mvn archetype:generate -DgroupId=com.skills.multimodule -DartifactId=sping-data
+mvn archetype:generate -DgroupId=com.skills.multimodule -DartifactId=sping-mvc
+mvn archetype:generate -DgroupId=com.skills.multimodule -DartifactId=sping-test
+
+Now if you open the parent-project pom.xml, you will find all three modules being added in there.
+
+<modules>
+  <module>spring-ioc</module>
+  <module>spring-data</module>
+  <module>sping-aop</module>
+</modules>
+
+Also, in each sub-module’s pom.xml, a parent section being added.
+
+<parent>
+  <groupId>com.skills.multimodule</groupId>
+  <artifactId>sping-parent-project</artifactId>
+  <version>1.0-SNAPSHOT</version>
+</parent>
+
+
+
+Ref:- http://websystique.com/maven/creating-maven-multi-module-project-with-eclipse/
