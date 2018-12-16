@@ -1,0 +1,90 @@
+Spring IOC
+----------
+1. default-init-method what will do?
+	Answer: If we define default-init-method, it will try to execute that init method before each bean initialization. That init method need to define inside of each bean class, but not necessary.
+	
+2. afterPropertiesSet() from InitializingBean interface and init-method in xml, which will call first?
+	Answer: afterPropertiesSet() method will call first after that whatever we mentioned in init-method of that bean in context xml, that will execute. If we used interface and xml config in bean and init-method name same as afterPropertiesSet(). Then it will execute only once.
+	
+3. destroy() from DisposableBean interface and destroy-method in xml, which will call first?
+	Answer: destroy() method will call first after that whatever we mentioned in destroy-method of that bean in context xml, that will execute. If we used interface and xml config in bean and destory-method name same as destroy(). Then it will execute only once.	
+
+4. BeanPostProcessor and Ordered interface?
+	Answer: BeanPostProcessor is used to callback before bean initialization and after initialization of every bean. We have to implement BeanPostProcessor interface and the implemented class need to be define in xml. If we define the implemented class in xml, spring will automatically identify that as post process bean.
+		Ordered interface is used to order the one or more BeanPostProcessor in same context. It will implement getOrder() method to define the order.
+
+5. Can we use BeanPostProcessor implemented class as normal bean?
+	Answer: Yes, we can use as a normal bean class. But it is not recommended. As we are using only for post procees purpose. If we didn't define id or name for that bean, then we can't access through container.
+	
+6. When index is required in constructor-ref or property?
+	Answer: If the constructor arguments are in same type or if we didn't define type then we have to go for that options.
+	
+7. Can we declare inner beans?
+	Answer: Yes, we can define inner beans. Instead of defining ref arguments, we can define inner beans. But inner beans, we can't use it outside.
+	
+8. Can we use inner beans outisde by using Context.getBeans()?
+	Answer: No, inner beans never called or used outisde.
+	
+9. What are the ways to do Dependency Injection in spring?
+	Answer:
+		1. Constructor Based
+		2. Setter Based
+		
+10. What are the collections, we can use it in bean configuration?
+	Answer:
+		1. List
+		2. Set
+		3. Map
+		4. props
+		
+11. What is value-type in list?
+	Answer: value-type defining the data type of elements or values inside the list.
+	
+12. How to create a linked list in xml?
+	Answer: Using java.util.LinkedList, we can create a linked list and assign to the property, where we required.
+		<bean id="linkedList" class="java.util.LinkedList">
+			<constructor-arg>
+				<list>
+					<value>India</value>
+					<value>Sri Lanka</value>
+					<value>Thailand</value>
+				</list>
+			</constructor-arg>
+	   </bean>
+	   
+13. How to inject another bean inside list?
+	Answer: Using below code we can inject another bean reference to list. But, the list should accept all objects.
+		<list>
+			..
+			<ref bean="beanName"></ref>
+		</list>
+		
+14. How to assign empty and null value in spring xml?
+	Answer: We can use "" to assign empty value and we can use <null/> to assign null value to any element. See the below example.
+		To assign Empty value:
+		----------------------
+		<bean id = "..." class = "exampleBean">
+		   <property name = "email" value = ""/>
+		</bean>
+		
+		To assign Null Value:
+		-----------------------
+		<bean id = "..." class = "exampleBean">
+		   <property name = "email"><null/></property>
+		</bean>
+		
+15. Autowire types in spring?
+	Answer:
+		1. no
+		2. byName
+		3. byType
+		4. constructor
+		5. default
+		
+16. Can we override autowiring?
+	Answer: Yes, by defining constructor or setter based, we can override the autowire.
+	
+17. Can we autowire primitive data types?
+	Answer: No, primitive data types and strings, can't do autowire.
+	
+18. 
