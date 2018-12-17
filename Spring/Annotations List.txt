@@ -1,0 +1,40 @@
+Annotations - Spring 
+--------------------
+@Component
+@Configuration
+@Bean
+@Repository
+@Controller
+@Service
+@ComponentScan
+@Scope
+@Autowired
+@Required
+@Qualifier
+@Target
+@Interface
+@Value
+@Retention
+@PropertySource
+
+Annotations - Java
+------------------
+@Inject
+@Inherited
+@Documented
+
+Annotations - AOP
+------------------
+@EnableAspectJAutoProxy
+@Aspect
+@Before
+@After
+@AfterThrowing
+@AfterReturning
+@Around
+@Target
+@args
+@within
+@this
+@Pointcut
+

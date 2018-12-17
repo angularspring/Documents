@@ -87,4 +87,188 @@ Spring IOC
 17. Can we autowire primitive data types?
 	Answer: No, primitive data types and strings, can't do autowire.
 	
-18. 
+18. What are the scope types available in Spring?
+	Answer:
+		1. singleton
+		2. prototype
+		3. request
+		4. session
+		5. global-session
+		
+19. How you create new instance, whenever the bean is calling?
+	Answer: We can set bean scope as prototype. Then it will create a new instance, whenever we are calling.
+			In XML => scope="prototype"
+			In Annoation => @Scope("prototype")
+
+20. What are the EventHandlers available in Spring Context?
+	Answer:
+		1. ContextRefreshedEvent
+		2. ContextStartedEvent
+		3. ContextStoppedEvent
+		4. ContextClosedEvent
+		5. RequestHandledEvent
+
+21. How many types of RetentionPolicy?
+	Answer:
+		1. SOURCE
+		2. CLASS
+		3. RUNTIME
+		
+22. What is @Target?
+	Answer: @Target will define the target element.
+	
+23. What are the element types are available in @Target?
+	Answer:
+		ElementType.ANNOTATION_TYPE
+		ElementType.CONSTRUCTOR
+		ElementType.FIELD
+		ElementType.LOCAL_VARIABLE
+		ElementType.METHOD
+		ElementType.PACKAGE
+		ElementType.PARAMETER
+		ElementType.TYPE -> Class, Interface, enum and annotation
+		
+24. Give some example usage of ANNOTATION_TYPE in @Target?
+	Answer: Answer is in the question itself. We are using @Target and @Retention only for custom annotation place.
+	
+25. How annotation used in Java super class can be inherited to sub classes?
+	Answer: Using @Inherited, we can inherit the annoations used in super class to sub class. We can this annotation only on Custom Annoation. Not in class directly.
+	
+26. How to create custom annotation?
+	Answer: Using @Interface , we can create custom annotation.
+	
+27. What are the ways to use multiple configuration class?
+	Answer:
+		1. If all the configuration is inside same package, then we can mention base package, it will take all configuration
+		2. If the configuration class in different package, 
+			1. We can define all the packages in @ComponentScan(basePackages="{}")
+			2. We can import the config class in main config class using @Import annotation
+
+28. How to avoid component scan for particular sub package in xml and annotation?
+	Answer:
+		1. XML - <context:exclude-filter type="annotation" expression="com.demo.ignore"/>
+		2. Annoation - @ComponentScan(basePackages = "com.concretepage",
+			includeFilters = @Filter(type = FilterType.REGEX, pattern="com.concretepage.*.*Util"),
+			excludeFilters = @Filter(type = FilterType.ASSIGNABLE_TYPE, classes = IUserService.class)) 
+	
+29. What are the  Component Scan Filter Types?
+	Answer:
+		Find the component filter types. 
+		
+		ANNOTATION: Component scan of classes can be included and excluded by configuring annotation name applied at class level. 
+
+		ASSIGNABLE_TYPE: Using interface name or class name that has been implemented or extended by the classes, we can include and exclude classes in component scanning. 
+
+		ASPECTJ: Using aspect expression targeting classes names, it can be included and excluded in component scanning. 
+
+		REGEX: Using regex expression targeting classes names, it can be included and excluded in component scanning. 
+
+		custom: We can also create custom filter type by implementing org.springframework.core.type.TypeFilter.
+		
+30. What is the difference between @Autowired and @Autowired()?
+	Answer: No difference both are same.
+	
+31. How to load property file into class?
+	Answer: Using @PropertySource(classpath:test.properties), we can load property file into class.
+	
+32. How to use the value from properties file after its loaded?
+	Answer: Using ${varname}, we can get the value from properties file.
+	
+	
+Spring - AOP
+------------
+1. What is AOP?
+	Answer: Aspect Oriented Programming. Aspect means class,type, method, constructor and so on.
+	
+2. Can we use Spring AOP in xml based context?
+	Answer: Yes, ofcourse , we can use Spring AOP in xml based context. But, we can't directly use AspectJ in xml based contexr, since it is annotation based.
+	
+3. Which is best Spring AOP or AspectJ AOP?
+	Answer: Spring AOP is best when you are going with Spring framework. Any how Spring AOP internally using AspectJ AOP only.
+	
+4. What is the difference between Spring AOP and AspectJ AOP?
+	Answer:
+		Spring AOP									AspectJ AOP
+		-------------------------------------		----------------------------------------------------
+		1. We can use it in XML	Based context		We can't use it in xml based context, only annotation
+			and annotation based also.
+		
+		2. No need to do any extra configuration	If you want to use AspectJ directly in spring framework, then we need to some more configurations.
+			while doing with spring framework
+			
+		3. Limited features							More features compared to Spring AOP
+		
+		4. Internally using AspectJ AOP				AspectJ is stand alone.
+		
+		5. We can use it only on methods			We can use it for other types. Ex: constructor
+		
+5. Which tag will use it to define aspects in XML?
+	Answer: <aop:config></aop:config> will be used to define all aspects inside it. To use this tag, we need to import this context http://www.springframework.org/schema/aop in xml.
+	
+6. What is Advice and types of advice in AOP?
+	Answer: AOP advice is kind of an interceptor around the joint point. Here joint point means method execution.
+			Types:
+			------
+			Before advice: Advice that executes before a join point, but which does not have the ability to prevent execution flow proceeding to the join point (unless it throws an exception).
+
+			After returning advice: Advice to be executed after a join point completes normally: for example, if a method returns without throwing an exception.
+
+			After throwing advice: Advice to be executed if a method exits by throwing an exception.
+
+			After (finally) advice: Advice to be executed regardless of the means by which a join point exits (normal or exceptional return).
+
+			Around advice: Advice that surrounds a join point such as a method invocation. This is the most powerful kind of advice. Around advice can perform custom behavior before and after the method invocation. It is also responsible for choosing whether to proceed to the join point or to shortcut the advised method execution by returning its own return value or throwing an exception.
+			
+7. What is pointcut?
+	Answer: Pointcut is a expression will intimate where to check the methods.
+	
+8. Type of pointcut designators?
+	Answer:
+		1. execution
+		2. within
+		3. this
+		4. target
+		5. args
+		6. bean
+		7. @target
+		8. @args
+		9. @within
+		10. @annotation
+	
+9. How to define pointcut only for inside packages not in sub package classes method execution?
+	Answer: execution(* com.xyz.service.*.*(..))
+	
+10. How to define the order of advice execution?
+	Answer: Either we can use @Order annotation or we can implement the Ordered interface. Which is the lowest number will execute first.
+	
+11. If advice method in different aspect class, then we can use @Order or Ordered interface. What we can do if advice methods are in same Aspect class?
+	Answer: If advice methods are in same class, then based on method name, it will execute. For example method names are log() and log1(). Then log() will execute first, then log1() will execute.
+	
+12. Whether aspect will be create new instance or single instance proxy?
+	Answer: Based on bean definition, it will create single or multiple instances will be created.
+	For example: Target class is prototype and Aspect class in singleton. Then all target class objects, it will give only one instance of aspect.
+	
+13. How enable AspectJ in spring using annotation and xml?
+	Answer:
+		XML -> <aop:aspectj-autoproxy/>
+		Annotation -> @EnableAspectJAutoProxy
+		
+14. Advising aspects with other aspects?
+	Answer: In Spring AOP, it is not possible to have aspects themselves be the target of advice from other aspects. The @Aspect annotation on a class marks it as an aspect, and hence excludes it from auto-proxying. 
+	
+15. In target class local or internal calls to methods from another method, will go through by proxy class or not?
+	Answer: No. A call from a method in a target to another method in the target does not get intercepted by the proxy. Try to remember the proxy pattern.
+	
+16. How you call through the proxy class, while calling internal method from another internal method?
+	Answer: Using AopContext.currentProxy(), we can get a proxy class of current class. With that we can call the method, which we want to call. 
+	Of course, take heed that this tightly couples your core business concern to AOP – something you are trying to avoid with AOP to begin with.  So it may be better to refactor the code such that internal calls are not required when you need advice to fire on all methods.
+	
+17. How to access the AopContext in outside?
+	Answer: Using @EnableAspectJAutoProxy(exposeProxy=true), we can make AopContext to be available in outside.
+	
+18. How to enable CGLIB proxies instead of using JDK dynamic proxies?
+	Answer: Usinng @EnableAspectJAutoProxy(proxyTargetClass=true), we can change the proxy class library to CGLIB proxy library.
+	
+19. What is @Configurable?
+	Answer: There is no way to inject dependencies into a bean created with the new operator. For that we can use @Configurable from AspectJ.
+	
