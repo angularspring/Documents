@@ -294,3 +294,27 @@ Spring - AOP
 19. What is @Configurable?
 	Answer: There is no way to inject dependencies into a bean created with the new operator. For that we can use @Configurable from AspectJ.
 	
+
+Spring MVC:
+-----------
+1. Diff b/w @Controller and @RestController?
+2. Define Deployment descriptor?
+3. Define DispatcherServlet?
+4. Define MVC?
+5. Which version included REST protocol?
+6. What is latest HTTP version?
+7. Diff b/w AJAX and REST?
+8. Diff b/w SOAP and REST?
+9. Diff b/w HTTP/1.1 and HTTP/2?
+10. What are the famous MVC frameworks in JAVA?
+11. what is MVC View Resolver?
+12. WebMVCConfigureAdaptor?
+13. WebApplicationInitializer?
+14. AbstractDispatcherServletInitilizer?
+15. BeanNameUrlHandlerMapping?
+16. Types of Url Handler Mapping?
+17. RequestMappingHandlerMapping?
+18. @RequestMapping
+19. @EnableWebMvc
+20. HandlerAdaptor
+21. Ambiguos Mapping Found error never stop server
