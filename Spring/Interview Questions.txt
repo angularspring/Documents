@@ -325,4 +325,20 @@ Spring MVC:
 26. @InitBinder - Only for one way from JSP to JAVA
 27. CustomEditor in initbinder and register
 28. PropertyEditorSupport
-29. 
+29. BindingResult
+30. HibernateValidator
+31. ResourceBundleMessageSource
+32. @Size, @NotEmpty
+33. Custom Validation
+34. ConstraintValidator
+35. CustomAnnotation
+36. @Valid
+37. implements Validator for custom validation
+38. Interceptor (Proxy)
+39. HandlerInterceptorAdapter
+40. InterceptorRegistry
+41. Filter (Decorator)
+42. @WebFilter
+43. Decorator Vs Proxy Pattern
+44. Interceptor Vs Filter
+45. 
