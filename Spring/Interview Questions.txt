@@ -318,3 +318,11 @@ Spring MVC:
 19. @EnableWebMvc
 20. HandlerAdaptor
 21. Ambiguos Mapping Found error never stop server
+22. Model & @ModelAttribute
+23. commandName vs modelAttribute
+24. pathName is needed or not?
+25. JSTL?
+26. @InitBinder - Only for one way from JSP to JAVA
+27. CustomEditor in initbinder and register
+28. PropertyEditorSupport
+29. 
