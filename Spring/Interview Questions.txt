@@ -298,47 +298,214 @@ Spring - AOP
 Spring MVC:
 -----------
 1. Diff b/w @Controller and @RestController?
+	Answer:
+	@Controller is used to mark classes as Spring MVC Controller.
+	@RestController is a convenience annotation that does nothing more than adding the @Controller and @ResponseBody annotations
+	So the following two controller definitions should do the same
+
+	@Controller
+	@ResponseBody
+	public class MyController { }
+
+	@RestController
+	public class MyRestController { }
+	
+	A key difference between a traditional MVC controller and the RESTful web service controller above is the way that the HTTP response body is created. Rather than relying on a view technology to perform server-side rendering of the data to HTML, this RESTful web service controller simply populates and returns a object. The object data will be written directly to the HTTP response as JSON.
+
+	This code uses Spring 4’s new @RestController annotation, which marks the class as a controller where every method returns a domain object instead of a view. It’s shorthand for @Controller and @ResponseBody rolled together.
+	
+	For more details visit the link:https://spring.io/guides/gs/rest-service/
+	https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/web/bind/annotation/RestController.html
+	
 2. Define Deployment descriptor?
+	Answer:
+	A web application's deployment descriptor describes the classes, resources and configuration of the application and how the web server uses them to serve web requests. When the web server receives a request for the application, it uses the deployment descriptor to map the URL of the request to the code that ought to handle the request.
+
+	The deployment descriptor is a file named web.xml. It resides in the app's WAR under the WEB-INF/ directory. The file is an XML file whose root element is <web-app>.
+
+	Here is a simple web.xml example that maps all URL paths (/*) to the servlet class mysite.server.ComingSoonServlet:
+
+	<web-app xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+		<servlet>
+			<servlet-name>comingsoon</servlet-name>
+			<servlet-class>mysite.server.ComingSoonServlet</servlet-class>
+		</servlet>
+		<servlet-mapping>
+			<servlet-name>comingsoon</servlet-name>
+			<url-pattern>/*</url-pattern>
+		</servlet-mapping>
+	</web-app>
+	
 3. Define DispatcherServlet?
+	Answer:
+	The DispatcherServlet is an actual Servlet (it inherits from the HttpServlet base class), and as such is declared in the web.xml of your web application. You need to map requests that you want the DispatcherServlet to handle, by using a URL mapping in the same web.xml file.
+	
 4. Define MVC?
-5. Which version included REST protocol?
-6. What is latest HTTP version?
-7. Diff b/w AJAX and REST?
-8. Diff b/w SOAP and REST?
-9. Diff b/w HTTP/1.1 and HTTP/2?
-10. What are the famous MVC frameworks in JAVA?
-11. what is MVC View Resolver?
-12. WebMVCConfigureAdaptor?
-13. WebApplicationInitializer?
-14. AbstractDispatcherServletInitilizer?
-15. BeanNameUrlHandlerMapping?
-16. Types of Url Handler Mapping?
-17. RequestMappingHandlerMapping?
-18. @RequestMapping
-19. @EnableWebMvc
-20. HandlerAdaptor
-21. Ambiguos Mapping Found error never stop server
-22. Model & @ModelAttribute
-23. commandName vs modelAttribute
-24. pathName is needed or not?
-25. JSTL?
-26. @InitBinder - Only for one way from JSP to JAVA
-27. CustomEditor in initbinder and register
-28. PropertyEditorSupport
-29. BindingResult
-30. HibernateValidator
-31. ResourceBundleMessageSource
-32. @Size, @NotEmpty
-33. Custom Validation
-34. ConstraintValidator
-35. CustomAnnotation
-36. @Valid
-37. implements Validator for custom validation
-38. Interceptor (Proxy)
-39. HandlerInterceptorAdapter
-40. InterceptorRegistry
-41. Filter (Decorator)
-42. @WebFilter
-43. Decorator Vs Proxy Pattern
-44. Interceptor Vs Filter
-45. 
+	Answer:
+	The Spring Web MVC framework provides Model-View-Controller (MVC) architecture and ready components that can be used to develop flexible and loosely coupled web applications. The MVC pattern results in separating the different aspects of the application (input logic, business logic, and UI logic), while providing a loose coupling between these elements.
+
+	The Model encapsulates the application data and in general they will consist of POJO.
+
+	The View is responsible for rendering the model data and in general it generates HTML output that the client's browser can interpret.
+
+	The Controller is responsible for processing user requests and building an appropriate model and passes it to the view for rendering.
+	
+5. When REST protocol introduced?
+	Answer:
+	REST was first introduced by Roy Fielding in 2000.
+	
+6. What is difference between REST API and SOAP API?
+	Answer:
+	REST API has no has no official standard at all because it is an architectural style. SOAP API, on the other hand, has an official standard because it is a protocol.
+	REST APIs uses multiple standards like HTTP, JSON, URL, and XML while SOAP APIs is largely based on HTTP and XML.
+	As REST API deploys multiple standards, so it takes fewer resources and bandwidth as compared to SOAP that uses XML for the creation of Payload and results in the large sized file.
+	The ways both APIs exposes the business logics are also different. REST API takes advantage of URL exposure like @path("/WeatherService") while SOAP API use of services interfaces like @WebService.
+	SOAP API defines too many standards, and its implementer implements the things in a standard way only. In the case of miscommunication from service, the result will be the error. REST API, on the other hand, don't make emphasis on too many standards and results in corrupt API in the end.
+	REST API uses Web Application Description Language, and SOAP API used Web Services Description language for describing the functionalities being offered by web services.
+	REST APIs are more convenient with JavaScript and can be implemented easily as well. SOAP APIs are also convenient with JavaScript but don't support for greater implementation.
+	
+7. What is latest HTTP version?
+	Answer:
+	Latest -> HTTP/2
+	But, still most of the servers are using HTTP/1.1
+	
+8. Diff b/w AJAX and REST?
+	Answer:
+	I can do it using AJAX. But I can also do it using a REST call.
+
+	Um, no. Those two are completely orthogonal. If you want to update your page with data you have to get from a server, you will do it using AJAX. There is no other way. And that AJAX call can use REST, or something else.
+
+	My problem is i really dont get the difference between REST and an HTTP browser request.(a.k.a a form submit). I have looked at formal definitions of REST and it seems like a HTTP request.
+
+	A REST call is an HTTP request, always. Though it can be used to handle regular browser calls (like form submits) and return full HTML pages, it's usually used to handle API calls that return only data (usually in JSON format).
+
+	So why it has a separate name?
+
+	Because REST is a specific style of using HTTP, arguably using it as it was originally meant to be used, but which most people didn't "get" and was thus rarely used for almost 2 decades.
+
+	Specifically, REST means encoding which entity you want to retrieve or manipulate in the URL itself (usually via an ID) and encoding what action you want to perform on it in the HTTP method used (GET for retrieving, POST for changing, PUT for creating, DELETE for deleting).
+
+9. Diff b/w AJAX and HTTP?
+	Answer:
+	XMLHttpRequest (XHR) is an API available to web browser scripting languages such as JavaScript. It is used to send HTTP or HTTPS requests to a web server and load the server response data back into the script.
+
+	And for AJAX request,
+
+	An Ajax call is an asynchronous request initiated by the browser that does not directly result in a page transition.
+
+	An Ajax ("Asynchronous Javascript and XML") request is sometimes called an XHR request ("XmlHttpRequest"), which is the name most browsers give the object used to send an Ajax request, because at least initially Ajax calls involved the sending and receiving of XML but now it's just as common to send/receive JSON, plain text or HTML.
+
+10. Diff b/w SOAP and REST?
+	Answer:
+	SOAP stands for Simple Object Access Protocol
+	REST stands for Representational State Transfer
+	
+	SOAP is a protocol. SOAP was designed with a specification. It includes a WSDL file which has the required information on what the web service does in addition to the location of the web service.
+	REST is an Architectural style in which a web service can only be treated as a RESTful service if it follows the constraints of being
+	Client Server
+	Stateless
+	Cacheable
+	Layered System
+	Uniform Interface
+	
+	SOAP cannot make use of REST since SOAP is a protocol and REST is an architectural pattern.
+	REST can make use of SOAP as the underlying protocol for web services, because in the end it is just an architectural pattern.
+	
+	SOAP uses service interfaces to expose its functionality to client applications. In SOAP, the WSDL file provides the client with the necessary information which can be used to understand what services the web service can offer.
+	
+	REST use Uniform Service locators to access to the components on the hardware device. For example, if there is an object which represents the data of an employee hosted on a URL as http://demo.guru99 , the below are some of URI that can exist to access them
+	http://demo.guru99.com/Employee
+
+	http://demo.guru99.com/Employee/1
+
+	SOAP requires more bandwidth for its usage. Since SOAP Messages contain a lot of information inside of it, the amount of data transfer using SOAP is generally a lot.
+	<?xml version="1.0"?>
+	<SOAP-ENV:Envelope 
+	xmlns:SOAP-ENV
+	="http://www.w3.org/2001/12/soap-envelope" 
+	SOAP-ENV:encodingStyle
+	=" http://www.w3.org/2001/12/soap-encoding">
+	<soap:Body>
+	 <Demo.guru99WebService
+	 xmlns="http://tempuri.org/">
+	   <EmployeeID>int</EmployeeID>
+	   </Demo.guru99WebService>
+	 </soap:Body>
+	</SOAP-ENV:Envelope>
+	REST does not need much bandwidth when requests are sent to the server. REST messages mostly just consist of JSON messages. Below is an example of a JSON message passed to a web server. You can see that the size of the message is comparatively smaller to SOAP.
+	{"city":"Mumbai","state":"Maharastra"}
+
+	SOAP can only work with XML format. As seen from SOAP messages, all data passed is in XML format.
+	REST permits different data format such as Plain text, HTML, XML, JSON, etc. But the most preferred format for transferring data is JSON.
+	
+11. Diff b/w HTTP/1.1 and HTTP/2?
+	Answer:
+	1. Protocol negotiation mechanism — protocol electing, eg. HTTP/1.1, HTTP/2 or other.
+	2. High-level compatibility with HTTP/1.1 — methods, status codes, URIs and header fields.
+	3. Page load speed improvements trough:
+	4. Compression of request headers
+	5. Binary protocol
+	6. HTTP/2 Server Push
+	7. Request multiplexing over a single TCP connection
+	8. Request pipelining
+	9. HOL blocking (Head-of-line) - Package blocking
+	
+	Visit for more details - https://medium.com/@factoryhr/http-2-the-difference-between-http-1-1-benefits-and-how-to-use-it-38094fa0e95b
+	
+12. What are the famous MVC frameworks in JAVA?
+	Answer:
+	1. Spring MVC
+	2. Struts
+	
+13. what is MVC View Resolver?
+14. WebMVCConfigureAdaptor?
+15. WebApplicationInitializer?
+16. AbstractDispatcherServletInitilizer?
+17. BeanNameUrlHandlerMapping?
+18. Types of Url Handler Mapping?
+19. RequestMappingHandlerMapping?
+20. @RequestMapping
+21. @EnableWebMvc
+22. HandlerAdaptor
+23. Ambiguos Mapping Found error - never stop server starting
+24. Model & @ModelAttribute
+25. commandName vs modelAttribute
+26. pathName is needed or not?
+27. JSTL?
+28. @InitBinder - Only for one way from JSP to JAVA
+29. CustomEditor in initbinder and register
+30. PropertyEditorSupport
+31. BindingResult
+32. HibernateValidator
+33. ResourceBundleMessageSource
+34. @Size, @NotEmpty
+35. Custom Validation
+36. ConstraintValidator
+37. CustomAnnotation
+38. @Valid
+39. implements Validator for custom validation
+40. Interceptor (Proxy)
+41. HandlerInterceptorAdapter
+42. InterceptorRegistry
+43. Filter (Decorator)
+44. @WebFilter
+45. Decorator Vs Proxy Pattern
+46. Interceptor Vs Filter
+47. @ExceptionHandler
+48. @ResponseStatus
+49. Local controller ExceptionHandler will override Global ExceptionHandler
+50. @ControllerAdvice
+51. SimpleMappingExceptionResolver
+52. LocaleChangeInterceptor
+53. LocaleResolver
+54. CutomLocaleChangeInterceptor
+55. SimpleUrlHandlerMapping
+56. ViewResolver
+57. InternalResourceViewResolver
+58. ResourceBundleViewResolver
+59. XmlViewResolver
+
+JPA
+---
+1. @DynamicUpdate
+2. @DynamicInsert
