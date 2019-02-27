@@ -505,6 +505,21 @@ Spring MVC:
 58. ResourceBundleViewResolver
 59. XmlViewResolver
 
+Spring Rest
+-----------
+1. What is Spring rest?
+2. Who introduced AJAX?
+3. XHR - XmlHttpRequest
+4. browser will cache GET request or not?
+5. Can we tell browser to cache some request?
+6. Query Parameter
+7. Path Variable
+8. Matrix Variables
+9. POST vs PUT vs DELETE
+10. Idempotent
+11. what is rest guidelines?
+12. 
+
 JPA
 ---
 1. @DynamicUpdate
