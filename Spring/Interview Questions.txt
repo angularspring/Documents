@@ -518,7 +518,10 @@ Spring Rest
 9. POST vs PUT vs DELETE
 10. Idempotent
 11. what is rest guidelines?
-12. 
+12. Form data two types
+13. application/x-www-form-urlencoded
+14. origin vs host header
+15. 
 
 JPA
 ---
