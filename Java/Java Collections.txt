@@ -1,0 +1,8 @@
+ArrayList         - Ordered (insertion order)
+LinkedArrayList   - Ordered(insertion order), Double-ended queue(access elements at first and last)
+HashMap           - Unordered, Unsorted
+TreeMap           - Ordered, Sorted (Order is based on sort criteria)
+LinkedHashMap     - Ordered(insertion order), Unsorted
+HashSet           - Based on HashMap. Unordered, Unsorted
+Treeset           - Based on TreeMap. Ordered, Sorted (Order is based on sort criteria)
+LinkedHashSet     - Based on LinkedHashMap. Ordered(insertion order), Unsorted
