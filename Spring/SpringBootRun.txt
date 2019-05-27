@@ -9,6 +9,6 @@ nohup /usr/java/jdk1.8.0_91/bin/java
 -XX:+PrintGCDetails  -XX:+PrintGCApplicationConcurrentTime -XX:+PrintHeapAtGC 
 -XX:+HeapDumpOnOutOfMemoryError -Xloggc:gc.log  -Dspring.profiles.active=prod,test 
 -Dlogging.config=logback.xml 
--Dspring.config.name=fis-authman-svs 
+-Dspring.config.name=API 
 -Djasypt.encryptor.password=FINO_DPS_UAT 
--jar fis-authman-svc-1.0.4.0-SNAPSHOT_upi.war &
+-jar api.war &
